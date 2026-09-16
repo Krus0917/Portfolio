@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A 3D asset artist portfolio." />
+    <title>Luis Montinola — 3D Asset Artist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="sticky-header.css" />
+    <link rel="stylesheet" href="placeholders.css" />
+    <link rel="stylesheet" href="portfolio-sections.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Luis Montinola home">LM<span>.</span></a>
+      <button class="menu-button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <nav id="main-nav" class="nav">
+        <a class="active" href="#work">Work</a><a href="#games">Games</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Available for junior roles</p>
+          <h1>I make digital<br />objects feel real.</h1>
+          <p class="intro">Hi, I’m Luis Montinola — a fresh graduate and aspiring 3D asset artist focused on crafted props, environments, and game-ready work.</p>
+          <a class="button" href="#work">See selected work <b>↘</b></a>
+        </div>
+        <div class="hero-art art-crate" aria-label="Featured stylized sci-fi crate render placeholder">
+          <div class="orb"></div><div class="crate"><i></i><i></i><i></i></div>
+          <p>01 / FEATURED ASSET</p>
+        </div>
+      </section>
+
+      <section id="work" class="work section">
+        <div class="section-heading"><p class="eyebrow">Creative work</p><h2>Art and assets<br />made from scratch.</h2><p class="muted">Browse my individual work by collection. Each gallery focuses on the asset itself, from design to final presentation.</p></div>
+        <div class="collection-grid">
+          <button class="collection-card collection-illustrations" type="button" data-modal-target="illustrations-modal"><span class="collection-number">01</span><span class="collection-label">Digital Illustrations</span><span class="collection-action">Open gallery ↗</span><span class="collection-preview preview-illustration"></span></button>
+          <button class="collection-card collection-characters" type="button" data-modal-target="characters-modal"><span class="collection-number">02</span><span class="collection-label">3D Character Assets</span><span class="collection-action">Open gallery ↗</span><span class="collection-preview preview-character"></span></button>
+          <button class="collection-card collection-environments" type="button" data-modal-target="environments-modal"><span class="collection-number">03</span><span class="collection-label">3D Environment Assets</span><span class="collection-action">Open gallery ↗</span><span class="collection-preview preview-environment"></span></button>
+        </div>
+      </section>
+
+      <section id="games" class="games section">
+        <div class="section-heading"><p class="eyebrow">Game projects</p><h2>Games built<br />with a team.</h2><p class="muted">These case studies show how my art and assets contributed to a complete playable project.</p></div>
+        <a class="game-card" href="project.html"><div class="game-card-art art-sci-fi"><div class="tank"></div><span>Capstone project</span></div><div class="game-card-copy"><p class="eyebrow">01 / 3D strategy simulation</p><h3>Eden Island<br /><em>Frontier</em></h3><p>A six-member capstone project exploring the implications of climate change through a 3D strategy simulation game.</p><span class="text-link">View case study <b>→</b></span></div></a>
+      </section>
+
+      <section id="about" class="about section">
+        <p class="eyebrow">About me</p>
+        <div class="about-layout"><h2>Curious by nature.<br />Detail-oriented by habit.</h2><div><p>I’m a recent graduate who enjoys the full process of creating a 3D asset: from the first blockout to the final texture and render. I’m currently looking for an opportunity to grow with a creative team.</p><a class="text-link" href="#contact">Get in touch <b>→</b></a></div></div>
+        <div class="tools"><span>Autodesk Maya</span><span>Substance 3D Painter</span><span>Unity Engine</span><span>Adobe Photoshop</span></div>
+      </section>
+
+      <section id="contact" class="contact">
+        <p class="eyebrow">Let’s work together</p>
+        <h2>Have a project<br />in mind?</h2>
+        <a class="contact-email" href="mailto:luis.montinola@gmail.com">luis.montinola@gmail.com <span>↗</span></a>
+      </section>
+    </main>
+    <div class="gallery-modal" id="illustrations-modal" role="dialog" aria-modal="true" aria-labelledby="illustrations-title" aria-hidden="true">
+      <div class="gallery-dialog"><button class="modal-close-button" type="button" aria-label="Close gallery">×</button><p class="eyebrow">Creative work / 01</p><h2 id="illustrations-title">Digital Illustrations</h2><p class="gallery-intro">A collection of character art, concept pieces, and illustrations created for visual storytelling and game ideas.</p><div class="gallery-grid"><div class="gallery-art art-diorama"><div class="rock rock-one"></div><div class="rock rock-two"></div><div class="tree"></div></div><div class="gallery-art art-radio"><div class="radio"><i></i><b></b><em></em></div></div><div class="gallery-art illustration-sun"></div></div><p class="gallery-note">Replace these preview panels with your illustration images and add captions when ready.</p></div>
+    </div>
+    <div class="gallery-modal" id="characters-modal" role="dialog" aria-modal="true" aria-labelledby="characters-title" aria-hidden="true">
+      <div class="gallery-dialog"><button class="modal-close-button" type="button" aria-label="Close gallery">×</button><p class="eyebrow">Creative work / 02</p><h2 id="characters-title">3D Character Assets</h2><p class="gallery-intro">Character models and animations created for school projects and game-ready scenes.</p><div class="gallery-grid"><div class="gallery-art character-one"></div><div class="gallery-art character-two"></div><div class="gallery-art character-three"></div></div><p class="gallery-note">Add your final character renders, turnarounds, or animation stills here.</p></div>
+    </div>
+    <div class="gallery-modal" id="environments-modal" role="dialog" aria-modal="true" aria-labelledby="environments-title" aria-hidden="true">
+      <div class="gallery-dialog"><button class="modal-close-button" type="button" aria-label="Close gallery">×</button><p class="eyebrow">Creative work / 03</p><h2 id="environments-title">3D Environment Assets</h2><p class="gallery-intro">Scenes, architectural studies, and environmental assets built to support immersive game worlds.</p><div class="gallery-grid"><div class="gallery-art environment-city"></div><div class="gallery-art environment-room"></div><div class="gallery-art environment-island"></div></div><p class="gallery-note">Add your environment renders, prop sets, and level assets here.</p></div>
+    </div>
+    <footer><a class="brand" href="#top">LM<span>.</span></a><p>© 2026 Luis Montinola</p><div><a href="#">LinkedIn</a><a href="#">ArtStation</a></div></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
