@@ -13,6 +13,31 @@ document.querySelectorAll('.nav a').forEach((link) => link.addEventListener('cli
   menuButton.textContent = 'Menu';
 }));
 
+const sectionLinks = [...document.querySelectorAll('.nav a')];
+const sectionsById = new Map(
+  sectionLinks
+    .map((link) => [link.hash.slice(1), document.getElementById(link.hash.slice(1))])
+    .filter(([, section]) => section)
+);
+
+const setActiveSection = (sectionId) => {
+  sectionLinks.forEach((link) => link.classList.toggle('active', link.hash === `#${sectionId}`));
+};
+
+const updateActiveSection = () => {
+  const markerPosition = window.innerHeight * 0.35;
+  const visibleSection = [...sectionsById.values()].find((section) => {
+    const bounds = section.getBoundingClientRect();
+    return bounds.top <= markerPosition && bounds.bottom >= markerPosition;
+  });
+
+  if (visibleSection) setActiveSection(visibleSection.id);
+};
+
+window.addEventListener('scroll', updateActiveSection, { passive: true });
+window.addEventListener('resize', updateActiveSection);
+updateActiveSection();
+
 const modalTriggers = document.querySelectorAll('[data-modal-target]');
 const galleryModals = document.querySelectorAll('.gallery-modal');
 

@@ -1,0 +1,33 @@
+.hero-portrait {
+  min-height: 495px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-portrait img {
+  position: absolute;
+  z-index: 1;
+  width: auto;
+  height: 250%;
+  max-width: none;
+  right: -15%;
+  top: -20%;
+  transform: scaleX(-1) rotate(-20deg);
+  transform-origin: center bottom;
+}
+
+.hero-portrait p {
+  padding: 7px 9px;
+  background: var(--lime);
+  color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .hero-portrait img {
+    height: 106%;
+    right: -10%;
+    bottom: -3%;
+  }
+}
