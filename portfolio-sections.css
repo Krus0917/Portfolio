@@ -34,6 +34,7 @@
 .games { padding: 9%; background: #e6e0d5; }
 .game-card { display: grid; grid-template-columns: 1.15fr .85fr; gap: 8%; max-width: 1100px; margin-top: 52px; padding: 22px; color: var(--ink); text-decoration: none; border: 1px solid #bdb7ae; transition: box-shadow .25s ease, transform .25s ease; }
 .game-card:hover { transform: translateY(-5px); box-shadow: 9px 10px 0 var(--orange); }
+.game-card + .game-card { margin-top: 20px; }
 .game-card-art { position: relative; min-height: 365px; overflow: hidden; }
 .game-card-art .tank { transform: translate(-4%, 16%) scale(1.25) skewY(-9deg); }
 .game-card-art span { position: absolute; right: 14px; bottom: 14px; padding: 8px 10px; background: var(--lime); font: 10px 'DM Mono', monospace; text-transform: uppercase; }
