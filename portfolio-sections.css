@@ -26,10 +26,10 @@
 .collection-number { color: var(--lime); }
 .collection-label { position: absolute; z-index: 2; right: 23px; bottom: 47px; left: 23px; font-size: clamp(22px, 2.4vw, 32px); font-weight: 800; line-height: 1; letter-spacing: -.06em; }
 .collection-action { position: absolute; z-index: 2; bottom: 21px; left: 23px; opacity: .85; }
-.collection-preview { position: absolute; inset: 78px 23px 110px; display: block; opacity: .95; }
-.preview-illustration { background: linear-gradient(145deg, #d1c2a5 0 42%, #40554d 42% 100%); clip-path: polygon(8% 0, 92% 8%, 100% 88%, 18% 100%, 0 35%); }
-.preview-character { width: 56%; inset: 72px auto 93px 23%; border-radius: 45% 45% 18% 18%; background: #e1b38e; box-shadow: inset 0 -74px 0 #263b47, 44px 21px 0 -16px #e1b38e, -42px 26px 0 -16px #e1b38e; }
-.preview-environment { background: linear-gradient(145deg, transparent 0 35%, #b9c8bd 36% 55%, transparent 56%), repeating-linear-gradient(90deg, #32494a 0 18px, #68817d 19px 34px); clip-path: polygon(0 64%, 18% 45%, 26% 56%, 47% 14%, 65% 46%, 84% 9%, 100% 62%, 100% 100%, 0 100%); }
+.collection-preview { position: absolute; inset: 78px 23px 110px; display: block; opacity: .95; background-repeat: no-repeat; background-position: center; background-size: contain; }
+.preview-illustration { background-color: #d1c2a5; background-image: url('img/Digital%20Illustrations/Tech-Balang.jpg'); }
+.preview-character { background-color: #815e4d; background-image: url('img/3D%20Character%20Assets/Male-Selection_1766029406.png'); }
+.preview-environment { background-color: #536a67; background-image: url('img/3D%20Environment%20Assets/3D-Model-Resource-Buildings_1766029361.png'); }
 
 .games { padding: 9%; background: #e6e0d5; }
 .game-card { display: grid; grid-template-columns: 1.15fr .85fr; gap: 8%; max-width: 1100px; margin-top: 52px; padding: 22px; color: var(--ink); text-decoration: none; border: 1px solid #bdb7ae; transition: box-shadow .25s ease, transform .25s ease; }
@@ -50,13 +50,18 @@
 .modal-close-button { position: absolute; top: 18px; right: 20px; width: 34px; height: 34px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; font-size: 23px; line-height: 1; }
 .gallery-dialog h2 { margin: 16px 0; font-size: clamp(42px, 6vw, 78px); }
 .gallery-intro { max-width: 560px; line-height: 1.65; }
-.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 38px; }
-.gallery-art { position: relative; min-height: 310px; overflow: hidden; }
+.gallery-grid { column-width: 240px; column-count: 3; column-gap: 15px; margin-top: 38px; }
+.gallery-art { position: relative; min-height: 0; overflow: hidden; }
+.gallery-image { display: block; width: 100%; margin: 0 0 15px; break-inside: avoid; background: #d8d2c7; }
+.gallery-image img { display: block; width: 100%; height: auto; }
 .illustration-sun { background: radial-gradient(circle at 72% 25%, #fff4b4 0 11%, transparent 12%), linear-gradient(#c79836, #4a5141); }
 .character-one,.character-two,.character-three { background: radial-gradient(ellipse at 50% 27%, #e6b18e 0 18%, transparent 19%), linear-gradient(#4d322b 0 16%, transparent 17%), linear-gradient(90deg, transparent 0 31%, #d8ff4f 32% 68%, transparent 69%), #304c63; }
 .character-two { filter: hue-rotate(90deg); transform: scaleX(-1); }.character-three { filter: hue-rotate(205deg); }
 .environment-city { background: linear-gradient(145deg, #a7bac1 0 45%, #394f50 46%); }.environment-room { background: linear-gradient(90deg, #3d342d 0 10%, transparent 11% 88%, #3d342d 89%), linear-gradient(#e6d4b0 0 62%, #9a6e47 63%); }.environment-island { background: radial-gradient(ellipse at 53% 65%, #61a35c 0 33%, transparent 34%), linear-gradient(#a3d7e3 0 57%, #6c9a9c 58%); }
 .gallery-note { margin: 20px 0 0; color: #66645e; font: 11px/1.6 'DM Mono', monospace; }
 body.modal-open { overflow: hidden; }
+.contact { position: relative; overflow: hidden; }
+.contact .eyebrow, .contact h2, .contact-email { position: relative; z-index: 1; max-width: 55%; }
+.contact-photo { position: absolute; right: 0; bottom: 0; z-index: 0; width: 43%; height: 100%; object-fit: cover; object-position: 68% top; }
 @keyframes gallery-enter { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@media (max-width: 760px) { .collection-grid,.gallery-grid { grid-template-columns: 1fr; }.collection-card { min-height: 330px; }.games { padding: 20% 7%; }.game-card { grid-template-columns: 1fr; gap: 26px; margin-top: 38px; }.game-card-art { min-height: 290px; }.gallery-modal { padding: 0; }.gallery-dialog { min-height: 100vh; max-height: none; }.gallery-art { min-height: 235px; } }
+@media (max-width: 760px) { .collection-grid { grid-template-columns: 1fr; }.gallery-grid { column-count: 1; column-width: auto; }.collection-card { min-height: 330px; }.games { padding: 20% 7%; }.game-card { grid-template-columns: 1fr; gap: 26px; margin-top: 38px; }.game-card-art { min-height: 290px; }.gallery-modal { padding: 0; }.gallery-dialog { min-height: 100vh; max-height: none; }.gallery-art { min-height: 0; }.contact .eyebrow, .contact h2, .contact-email { max-width: none; }.contact-photo { position: relative; display: block; width: min(100%, 420px); height: 330px; margin: 34px 0 -9% auto; object-position: 68% top; } }
