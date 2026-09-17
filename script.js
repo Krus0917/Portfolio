@@ -41,6 +41,30 @@ updateActiveSection();
 const modalTriggers = document.querySelectorAll('[data-modal-target]');
 const galleryModals = document.querySelectorAll('.gallery-modal');
 
+document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
+  const image = galleryImage.querySelector('img');
+  if (!image || !image.alt) return;
+
+  const descriptionId = `gallery-description-${index + 1}`;
+  const description = document.createElement('p');
+  description.className = 'gallery-popover';
+  description.id = descriptionId;
+  description.textContent = image.alt;
+  galleryImage.tabIndex = 0;
+  galleryImage.setAttribute('aria-describedby', descriptionId);
+  galleryImage.append(description);
+  const showDescription = () => galleryImage.classList.add('is-active');
+  const hideDescription = () => {
+    if (document.activeElement !== galleryImage) galleryImage.classList.remove('is-active');
+  };
+  galleryImage.addEventListener('mouseenter', showDescription);
+  galleryImage.addEventListener('mouseleave', hideDescription);
+  galleryImage.addEventListener('pointerenter', showDescription);
+  galleryImage.addEventListener('pointerleave', hideDescription);
+  galleryImage.addEventListener('focus', showDescription);
+  galleryImage.addEventListener('blur', () => galleryImage.classList.remove('is-active'));
+});
+
 const closeGallery = (modal) => {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');

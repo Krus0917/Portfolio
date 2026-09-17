@@ -54,6 +54,9 @@
 .gallery-art { position: relative; min-height: 0; overflow: hidden; }
 .gallery-image { display: block; width: 100%; margin: 0 0 15px; break-inside: avoid; background: #d8d2c7; }
 .gallery-image img { display: block; width: 100%; height: auto; }
+.gallery-image:focus { outline: 3px solid var(--lime); outline-offset: -3px; }
+.gallery-popover { position: absolute; right: 0; bottom: 0; left: 0; z-index: 2; visibility: hidden; margin: 0; padding: 14px 15px; transform: translateY(100%); background: rgba(22, 22, 19, .9); color: var(--paper); font: 11px/1.5 'DM Mono', monospace; opacity: 0; transition: transform .2s ease, opacity .2s ease, visibility 0s linear .2s; }
+.gallery-image.is-active .gallery-popover, .gallery-image:focus .gallery-popover { visibility: visible; transform: translateY(0); opacity: 1; transition-delay: 0s; }
 .illustration-sun { background: radial-gradient(circle at 72% 25%, #fff4b4 0 11%, transparent 12%), linear-gradient(#c79836, #4a5141); }
 .character-one,.character-two,.character-three { background: radial-gradient(ellipse at 50% 27%, #e6b18e 0 18%, transparent 19%), linear-gradient(#4d322b 0 16%, transparent 17%), linear-gradient(90deg, transparent 0 31%, #d8ff4f 32% 68%, transparent 69%), #304c63; }
 .character-two { filter: hue-rotate(90deg); transform: scaleX(-1); }.character-three { filter: hue-rotate(205deg); }
