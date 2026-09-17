@@ -28,8 +28,8 @@
 .collection-action { position: absolute; z-index: 2; bottom: 21px; left: 23px; opacity: .85; }
 .collection-preview { position: absolute; inset: 78px 23px 110px; display: block; opacity: .95; background-repeat: no-repeat; background-position: center; background-size: contain; }
 .preview-illustration { background-color: #d1c2a5; background-image: url('img/Digital%20Illustrations/Tech-Balang.jpg'); }
-.preview-character { background-color: #815e4d; background-image: url('img/3D%20Character%20Assets/Male-Selection_1766029406.png'); }
-.preview-environment { background-color: #536a67; background-image: url('img/3D%20Environment%20Assets/3D-Model-Resource-Buildings_1766029361.png'); }
+.preview-character { background-color: #815e4d; background-image: url('img/3D%20Character%20Assets/Farmer%20Male%20Character.png'); }
+.preview-environment { background-color: #536a67; background-image: url('img/3D%20Environment%20Assets/3D-Model-Resource-Buildings.png'); }
 
 .games { padding: 9%; background: #e6e0d5; }
 .game-card { display: grid; grid-template-columns: 1.15fr .85fr; gap: 8%; max-width: 1100px; margin-top: 52px; padding: 22px; color: var(--ink); text-decoration: none; border: 1px solid #bdb7ae; transition: box-shadow .25s ease, transform .25s ease; }
