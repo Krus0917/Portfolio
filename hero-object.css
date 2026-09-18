@@ -5,7 +5,6 @@
   display: flex;
   justify-content: flex-end;
 }
-
 .hero-portrait img {
   position: absolute;
   z-index: 1;
@@ -17,13 +16,11 @@
   transform: scaleX(-1) rotate(-20deg);
   transform-origin: center bottom;
 }
-
 .hero-portrait p {
   padding: 7px 9px;
   background: var(--lime);
   color: var(--ink);
 }
-
 @media (max-width: 700px) {
   .hero-portrait img {
     height: 106%;
