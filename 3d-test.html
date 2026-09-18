@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Interactive GLB model test viewer." />
+    <title>Interactive 3D Test - Luis Montinola</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="portfolio-sections.css" />
+    <style>
+      .model-test-page { min-height: 100vh; padding: 9%; background: var(--green-dark); color: var(--paper); }
+      .model-test-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; }
+      .model-test-header h1 { max-width: 700px; margin: 18px 0 24px; font-size: clamp(48px, 8vw, 100px); line-height: .9; letter-spacing: -.07em; }
+      .model-test-copy { max-width: 560px; line-height: 1.65; }
+      .model-test-link { color: var(--paper); font: 11px 'DM Mono', monospace; text-decoration: none; white-space: nowrap; }
+      .model-test-work { margin: 12% -9% -9%; padding: 9%; background: var(--paper); color: var(--ink); }
+      .model-test-work .section-heading { max-width: 650px; }
+      .model-test-work .collection-grid { margin-top: 52px; }
+      .model-test-work .gallery-art { border: 0; padding: 0; cursor: pointer; }
+      .model-test-work .gallery-art button { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; }
+      .model-test-work .gallery-art img { pointer-events: none; }
+      .model-test-work .gallery-art:focus-within { outline: 3px solid var(--lime); outline-offset: -3px; }
+      .model-popup-dialog { width: min(100%, 900px); padding: clamp(34px, 5vw, 58px); }
+      .model-popup-viewer { margin-top: 30px; background: #c7cbc7; }
+      .model-popup-viewer model-viewer { display: block; width: 100%; height: min(65vh, 620px); background: #c7cbc7; }
+      .model-popup-status { margin: 14px 0 0; color: #66645e; font: 11px/1.6 'DM Mono', monospace; }
+      .model-popover { align-items: initial; justify-content: initial; padding: 0; overflow: visible; background: rgba(22, 22, 19, .25); backdrop-filter: blur(2px); }
+      .model-popover.open { display: block; }
+      .model-popover .model-popup-dialog { position: fixed; container-type: inline-size; overflow: visible; width: min(460px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 28px 30px 24px; box-shadow: 0 24px 70px rgba(0, 0, 0, .35); }
+      .model-popover .model-popup-dialog h2 { max-width: 100%; overflow: hidden; font-size: clamp(20px, 8cqw, 46px); line-height: .95; white-space: nowrap; text-overflow: ellipsis; }
+      .model-popover .model-popup-viewer model-viewer { height: min(42vh, 360px); }
+      .model-popover .model-popup-dialog::before { position: absolute; top: var(--pointer-top, 50%); width: 0; height: 0; content: ''; transform: translateY(-50%); }
+      .model-popover.pointer-right .model-popup-dialog::before { left: -14px; border-top: 14px solid transparent; border-right: 14px solid var(--paper); border-bottom: 14px solid transparent; }
+      .model-popover.pointer-left .model-popup-dialog::before { right: -14px; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 14px solid var(--paper); }
+      @media (max-width: 700px) { .model-test-page { padding: 20% 7%; }.model-test-header { display: block; }.model-test-link { display: inline-block; margin-top: 18px; }.model-test-work { margin: 20% -7% -20%; padding: 20% 7%; }.model-popover { padding: 0; }.model-popover .model-popup-dialog { inset: 0; width: 100%; max-height: none; overflow-y: auto; padding: 72px 7% 34px; }.model-popover .model-popup-dialog::before { display: none; }.model-popover .model-popup-viewer model-viewer { height: 58vh; } }
+    </style>
+  </head>
+  <body>
+    <main class="model-test-page">
+      <div class="model-test-header">
+        <div>
+          <p class="eyebrow">Interactive 3D test</p>
+          <h1>Rotate it.<br />Inspect it.</h1>
+          <p class="model-test-copy">This page loads one local GLB file so you can check model scale, materials, lighting, rotation, and zooming before adding a finished viewer to the portfolio.</p>
+        </div>
+        <a class="model-test-link" href="index.html#work">← Back to work</a>
+      </div>
+      <section id="work" class="model-test-work section">
+        <div class="section-heading">
+          <p class="eyebrow">Creative work</p>
+          <h2>Choose a preview.<br />Open the model.</h2>
+          <p class="muted">Open a collection, then click any PNG preview to open its interactive GLB in a popup.</p>
+        </div>
+        <div class="collection-grid">
+          <button class="collection-card collection-illustrations" type="button" data-gallery-target="illustrations-gallery">
+            <span class="collection-number">01</span>
+            <span class="collection-label">Digital Illustrations</span>
+            <span class="collection-action">Open gallery ↗</span>
+            <span class="collection-preview preview-illustration"></span>
+          </button>
+          <button class="collection-card collection-characters" type="button" data-gallery-target="characters-gallery">
+            <span class="collection-number">02</span>
+            <span class="collection-label">3D Character Assets</span>
+            <span class="collection-action">Open gallery ↗</span>
+            <span class="collection-preview preview-character"></span>
+          </button>
+          <button class="collection-card collection-environments" type="button" data-gallery-target="environments-gallery">
+            <span class="collection-number">03</span>
+            <span class="collection-label">3D Environment Assets</span>
+            <span class="collection-action">Open gallery ↗</span>
+            <span class="collection-preview preview-environment"></span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div class="gallery-modal" id="illustrations-gallery" role="dialog" aria-modal="true" aria-labelledby="illustrations-gallery-title" aria-hidden="true">
+      <div class="gallery-dialog">
+        <button class="modal-close-button" type="button" aria-label="Close gallery">×</button>
+        <p class="eyebrow">Creative work / 01</p>
+        <h2 id="illustrations-gallery-title">Digital Illustrations</h2>
+        <p class="gallery-intro">Select a preview to test the handoff from a portfolio image to an interactive 3D model.</p>
+        <div class="gallery-grid">
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Tech Balang"><img src="img/Digital%20Illustrations/Tech-Balang.jpg" alt="Tech Balang illustration" /></button></div>
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Tech Balang movement"><img src="img/Digital%20Illustrations/TechBalang-Move.jpg" alt="Tech Balang movement illustration" /></button></div>
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Main house concept"><img src="img/Digital%20Illustrations/Main%20House%20-%20Concept%20Art.png" alt="Main house concept art" /></button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-modal" id="characters-gallery" role="dialog" aria-modal="true" aria-labelledby="characters-gallery-title" aria-hidden="true">
+      <div class="gallery-dialog">
+        <button class="modal-close-button" type="button" aria-label="Close gallery">×</button>
+        <p class="eyebrow">Creative work / 02</p>
+        <h2 id="characters-gallery-title">3D Character Assets</h2>
+        <p class="gallery-intro">Click a character preview to load the test GLB. Replace its data-model path when you add the matching exported model.</p>
+        <div class="gallery-grid">
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="models/Trial%20Character.glb" data-model-name="Farmer male character"><img src="img/3D%20Character%20Assets/Farmer%20Male%20Character.png" alt="Farmer male character" /></button></div>
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Farmer female character"><img src="img/3D%20Character%20Assets/Farmer%20Female%20Character.png" alt="Farmer female character" /></button></div>
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Student main character"><img src="img/3D%20Character%20Assets/Student%20Main%20Character.png" alt="Student main character" /></button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-modal" id="environments-gallery" role="dialog" aria-modal="true" aria-labelledby="environments-gallery-title" aria-hidden="true">
+      <div class="gallery-dialog">
+        <button class="modal-close-button" type="button" aria-label="Close gallery">×</button>
+        <p class="eyebrow">Creative work / 03</p>
+        <h2 id="environments-gallery-title">3D Environment Assets</h2>
+        <p class="gallery-intro">Click an environment preview to load the test GLB in the interactive viewer.</p>
+        <div class="gallery-grid">
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Main house"><img src="img/3D%20Environment%20Assets/3D-Model-Main-House.png" alt="Main house 3D model" /></button></div>
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Resource buildings"><img src="img/3D%20Environment%20Assets/3D-Model-Resource-Buildings.png" alt="Resource buildings 3D model" /></button></div>
+          <div class="gallery-art gallery-image"><button class="model-trigger" type="button" data-model="img/3D%20Models/test-model.glb" data-model-name="Sewing machine"><img src="img/3D%20Environment%20Assets/Sewing%20Machine.png" alt="Sewing machine 3D asset" /></button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-modal model-popover" id="model-viewer-modal" role="dialog" aria-modal="true" aria-labelledby="model-viewer-title" aria-hidden="true">
+      <div class="gallery-dialog model-popup-dialog">
+        <button class="modal-close-button" type="button" aria-label="Close 3D model viewer">×</button>
+        <p class="eyebrow">Interactive 3D model</p>
+        <h2 id="model-viewer-title">Model preview</h2>
+        <div class="model-popup-viewer">
+          <model-viewer
+            id="model-viewer"
+            camera-controls
+            touch-action="pan-y"
+            shadow-intensity="1"
+            exposure="1">
+          </model-viewer>
+        </div>
+        <p class="model-popup-status" id="model-viewer-status">Drag to rotate. Scroll or pinch to zoom.</p>
+      </div>
+    </div>
+
+    <script>
+      const modelViewer = document.getElementById('model-viewer');
+      const galleries = document.querySelectorAll('.gallery-modal');
+      const modelViewerModal = document.getElementById('model-viewer-modal');
+      const modelViewerTitle = document.getElementById('model-viewer-title');
+
+      const closeGallery = (gallery) => {
+        gallery.classList.remove('open');
+        gallery.setAttribute('aria-hidden', 'true');
+        if (!document.querySelector('.gallery-modal.open')) document.body.classList.remove('modal-open');
+      };
+
+      document.querySelectorAll('[data-gallery-target]').forEach((card) => card.addEventListener('click', () => {
+        const gallery = document.getElementById(card.dataset.galleryTarget);
+        gallery.classList.add('open');
+        gallery.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        gallery.querySelector('.modal-close-button').focus();
+      }));
+
+      document.querySelectorAll('.model-trigger').forEach((trigger) => trigger.addEventListener('click', () => {
+        const triggerBounds = trigger.getBoundingClientRect();
+        modelViewer.src = trigger.dataset.model;
+        modelViewer.alt = `Interactive 3D model: ${trigger.dataset.modelName}`;
+        modelViewerTitle.textContent = trigger.dataset.modelName;
+        modelViewerModal.classList.add('open');
+        modelViewerModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        if (window.matchMedia('(min-width: 701px)').matches) {
+          const popoverWidth = Math.min(460, window.innerWidth - 32);
+          const popoverHeight = Math.min(500, window.innerHeight - 32);
+          const rightSideLeft = triggerBounds.right + 16;
+          const leftSideLeft = triggerBounds.left - popoverWidth - 16;
+          const opensRight = rightSideLeft + popoverWidth <= window.innerWidth - 16;
+          const left = opensRight
+            ? rightSideLeft
+            : Math.max(16, leftSideLeft);
+          const top = Math.max(16, Math.min(triggerBounds.top, window.innerHeight - popoverHeight - 16));
+          const modelPopupDialog = modelViewerModal.querySelector('.model-popup-dialog');
+          const pointerTop = Math.max(28, Math.min(triggerBounds.top + (triggerBounds.height / 2) - top, modelPopupDialog.offsetHeight - 28));
+          modelViewerModal.classList.toggle('pointer-right', opensRight);
+          modelViewerModal.classList.toggle('pointer-left', !opensRight);
+          modelViewerModal.style.setProperty('--pointer-top', `${pointerTop}px`);
+          modelPopupDialog.style.left = `${left}px`;
+          modelPopupDialog.style.top = `${top}px`;
+        }
+        modelViewerModal.querySelector('.modal-close-button').focus();
+      }));
+
+      galleries.forEach((gallery) => {
+        gallery.querySelector('.modal-close-button').addEventListener('click', () => closeGallery(gallery));
+        gallery.addEventListener('click', (event) => { if (event.target === gallery) closeGallery(gallery); });
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') galleries.forEach(closeGallery);
+      });
+    </script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
+    </script>
+  </body>
+</html>
