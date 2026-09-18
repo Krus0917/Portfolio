@@ -77,6 +77,18 @@
   grid-template-columns:1fr 1fr;
   gap:25px
 }
+.detail-video {
+  grid-column: 1 / -1;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #20201d;
+}
+.detail-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .detail-image {
   height:440px;
   position:relative;
@@ -127,6 +139,10 @@
   }
   .detail-image {
     height:330px
+  }
+  .detail-video {
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
   .mini-contact {
     margin:20% -7% 0
