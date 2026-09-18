@@ -174,6 +174,11 @@
         <p class="gallery-intro">Character models and animations created for school projects and game-ready scenes.</p>
         <div class="gallery-grid">
           <div class="gallery-art gallery-image">
+            <button class="model-trigger" type="button" data-model="models/Trial%20Character.glb" data-model-name="Farmer male character">
+              <img src="img/3D%20Character%20Assets/Farmer%20Male%20Character.png" alt="Farmer male character" />
+            </button>
+          </div>
+          <div class="gallery-art gallery-image">
             <img src="img/3D%20Character%20Assets/Customer%20Variation%20Female%201.png" alt="Customer variation female 1" />
           </div>
           <div class="gallery-art gallery-image">
@@ -183,16 +188,15 @@
             <img src="img/3D%20Character%20Assets/Customer%20Variation%20Male%201.png" alt="Customer variation male 1" />
           </div>
           <div class="gallery-art gallery-image">
+            <button class="model-trigger" type="button" data-model="models/Character%20Self%20look%20alike.glb" data-model-name="Self-look-alike character">
+              <img src="img/3D%20Character%20Assets/Self%20Look%20like%20Character%20with%20thesis%20as%20his%20weapon.png" alt="Self-look-alike character holding a thesis as a weapon" />
+            </button>
+          </div>
+          <div class="gallery-art gallery-image">
             <img src="img/3D%20Character%20Assets/Customer%20Variation%20Male%202.png" alt="Customer variation male 2" />
           </div>
           <div class="gallery-art gallery-image">
             <img src="img/3D%20Character%20Assets/Farmer%20Female%20Character.png" alt="Farmer female character" />
-          </div>
-          <div class="gallery-art gallery-image">
-            <img src="img/3D%20Character%20Assets/Farmer%20Male%20Character.png" alt="Farmer male character" />
-          </div>
-          <div class="gallery-art gallery-image">
-            <img src="img/3D%20Character%20Assets/Self%20Look%20like%20Character%20with%20thesis%20as%20his%20weapon.png" alt="Self-look-alike character holding a thesis as a weapon" />
           </div>
           <div class="gallery-art gallery-image">
             <img src="img/3D%20Character%20Assets/Student%20Main%20Character.png" alt="Student main character" />
@@ -282,6 +286,17 @@
         </div>
       </div>
     </div>
+    <div class="gallery-modal model-popover" id="model-viewer-modal" role="dialog" aria-modal="true" aria-labelledby="model-viewer-title" aria-hidden="true">
+      <div class="gallery-dialog model-popup-dialog">
+        <button class="modal-close-button" type="button" aria-label="Close 3D model viewer">×</button>
+        <p class="eyebrow">Interactive 3D model</p>
+        <h2 id="model-viewer-title">Model preview</h2>
+        <div class="model-popup-viewer">
+          <model-viewer id="model-viewer" camera-controls touch-action="pan-y" shadow-intensity="1" exposure="1"></model-viewer>
+        </div>
+        <p class="model-popup-status">Drag to rotate. Scroll or pinch to zoom.</p>
+      </div>
+    </div>
     <footer>
       <a class="brand" href="#top">LM<span>.</span>
       </a>
@@ -292,6 +307,8 @@
       </div>
     </footer>
     <script src="script.js">
+    </script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
     </script>
   </body>
 </html>

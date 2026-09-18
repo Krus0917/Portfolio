@@ -40,6 +40,9 @@ updateActiveSection();
 
 const modalTriggers = document.querySelectorAll('[data-modal-target]');
 const galleryModals = document.querySelectorAll('.gallery-modal');
+const modelViewer = document.getElementById('model-viewer');
+const modelViewerModal = document.getElementById('model-viewer-modal');
+const modelViewerTitle = document.getElementById('model-viewer-title');
 
 document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
   const image = galleryImage.querySelector('img');
@@ -68,7 +71,7 @@ document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
 const closeGallery = (modal) => {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
+  if (!document.querySelector('.gallery-modal.open')) document.body.classList.remove('modal-open');
 };
 
 modalTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
@@ -83,6 +86,33 @@ galleryModals.forEach((modal) => {
   modal.querySelector('.modal-close-button').addEventListener('click', () => closeGallery(modal));
   modal.addEventListener('click', (event) => { if (event.target === modal) closeGallery(modal); });
 });
+
+document.querySelectorAll('.model-trigger').forEach((trigger) => trigger.addEventListener('click', () => {
+  const triggerBounds = trigger.getBoundingClientRect();
+  modelViewer.src = trigger.dataset.model;
+  modelViewer.alt = `Interactive 3D model: ${trigger.dataset.modelName}`;
+  modelViewerTitle.textContent = trigger.dataset.modelName;
+  modelViewerModal.classList.add('open');
+  modelViewerModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+
+  if (window.matchMedia('(min-width: 761px)').matches) {
+    const popoverWidth = Math.min(460, window.innerWidth - 32);
+    const popoverHeight = Math.min(500, window.innerHeight - 32);
+    const opensRight = triggerBounds.right + 16 + popoverWidth <= window.innerWidth - 16;
+    const left = opensRight ? triggerBounds.right + 16 : Math.max(16, triggerBounds.left - popoverWidth - 16);
+    const top = Math.max(16, Math.min(triggerBounds.top, window.innerHeight - popoverHeight - 16));
+    const modelPopupDialog = modelViewerModal.querySelector('.model-popup-dialog');
+    const pointerTop = Math.max(28, Math.min(triggerBounds.top + (triggerBounds.height / 2) - top, modelPopupDialog.offsetHeight - 28));
+    modelViewerModal.classList.toggle('pointer-right', opensRight);
+    modelViewerModal.classList.toggle('pointer-left', !opensRight);
+    modelViewerModal.style.setProperty('--pointer-top', `${pointerTop}px`);
+    modelPopupDialog.style.left = `${left}px`;
+    modelPopupDialog.style.top = `${top}px`;
+  }
+
+  modelViewerModal.querySelector('.modal-close-button').focus();
+}));
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') galleryModals.forEach((modal) => closeGallery(modal));

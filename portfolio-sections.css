@@ -54,6 +54,8 @@
 .gallery-art { position: relative; min-height: 0; overflow: hidden; }
 .gallery-image { display: block; width: 100%; margin: 0 0 15px; break-inside: avoid; background: #d8d2c7; }
 .gallery-image img { display: block; width: 100%; height: auto; }
+.model-trigger { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; }
+.model-trigger img { pointer-events: none; }
 .gallery-image:focus { outline: 3px solid var(--lime); outline-offset: -3px; }
 .gallery-popover { position: absolute; right: 0; bottom: 0; left: 0; z-index: 2; visibility: hidden; margin: 0; padding: 14px 15px; transform: translateY(100%); background: rgba(22, 22, 19, .9); color: var(--paper); font: 11px/1.5 'DM Mono', monospace; opacity: 0; transition: transform .2s ease, opacity .2s ease, visibility 0s linear .2s; }
 .gallery-image.is-active .gallery-popover, .gallery-image:focus .gallery-popover { visibility: visible; transform: translateY(0); opacity: 1; transition-delay: 0s; }
@@ -63,8 +65,18 @@
 .environment-city { background: linear-gradient(145deg, #a7bac1 0 45%, #394f50 46%); }.environment-room { background: linear-gradient(90deg, #3d342d 0 10%, transparent 11% 88%, #3d342d 89%), linear-gradient(#e6d4b0 0 62%, #9a6e47 63%); }.environment-island { background: radial-gradient(ellipse at 53% 65%, #61a35c 0 33%, transparent 34%), linear-gradient(#a3d7e3 0 57%, #6c9a9c 58%); }
 .gallery-note { margin: 20px 0 0; color: #66645e; font: 11px/1.6 'DM Mono', monospace; }
 body.modal-open { overflow: hidden; }
+.model-popover { align-items: initial; justify-content: initial; padding: 0; overflow: visible; background: rgba(22, 22, 19, .25); backdrop-filter: blur(2px); }
+.model-popover.open { display: block; }
+.model-popover .model-popup-dialog { position: fixed; container-type: inline-size; overflow: visible; width: min(460px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 28px 30px 24px; box-shadow: 0 24px 70px rgba(0, 0, 0, .35); }
+.model-popover .model-popup-dialog h2 { max-width: 100%; overflow: hidden; font-size: clamp(20px, 8cqw, 46px); line-height: .95; white-space: nowrap; text-overflow: ellipsis; }
+.model-popup-viewer { margin-top: 30px; background: #c7cbc7; }
+.model-popup-viewer model-viewer { display: block; width: 100%; height: min(42vh, 360px); background: #c7cbc7; }
+.model-popup-status { margin: 14px 0 0; color: #66645e; font: 11px/1.6 'DM Mono', monospace; }
+.model-popover .model-popup-dialog::before { position: absolute; top: var(--pointer-top, 50%); width: 0; height: 0; content: ''; transform: translateY(-50%); }
+.model-popover.pointer-right .model-popup-dialog::before { left: -14px; border-top: 14px solid transparent; border-right: 14px solid var(--paper); border-bottom: 14px solid transparent; }
+.model-popover.pointer-left .model-popup-dialog::before { right: -14px; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 14px solid var(--paper); }
 .contact { position: relative; overflow: hidden; }
 .contact .eyebrow, .contact h2, .contact-email { position: relative; z-index: 1; max-width: 55%; }
 .contact-photo { position: absolute; right: 0; bottom: 0; z-index: 0; width: 43%; height: 100%; object-fit: cover; object-position: 68% top; }
 @keyframes gallery-enter { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@media (max-width: 760px) { .collection-grid { grid-template-columns: 1fr; }.gallery-grid { column-count: 1; column-width: auto; }.collection-card { min-height: 330px; }.games { padding: 20% 7%; }.game-card { grid-template-columns: 1fr; gap: 26px; margin-top: 38px; }.game-card-art { min-height: 290px; }.gallery-modal { padding: 0; }.gallery-dialog { min-height: 100vh; max-height: none; }.gallery-art { min-height: 0; }.contact .eyebrow, .contact h2, .contact-email { max-width: none; }.contact-photo { position: relative; display: block; width: min(100%, 420px); height: 330px; margin: 34px 0 -9% auto; object-position: 68% top; } }
+@media (max-width: 760px) { .collection-grid { grid-template-columns: 1fr; }.gallery-grid { column-count: 1; column-width: auto; }.collection-card { min-height: 330px; }.games { padding: 20% 7%; }.game-card { grid-template-columns: 1fr; gap: 26px; margin-top: 38px; }.game-card-art { min-height: 290px; }.gallery-modal { padding: 0; }.gallery-dialog { min-height: 100vh; max-height: none; }.gallery-art { min-height: 0; }.contact .eyebrow, .contact h2, .contact-email { max-width: none; }.contact-photo { position: relative; display: block; width: min(100%, 420px); height: 330px; margin: 34px 0 -9% auto; object-position: 68% top; }.model-popover { padding: 0; }.model-popover .model-popup-dialog { inset: 0; width: 100%; max-height: none; overflow-y: auto; padding: 72px 7% 34px; }.model-popover .model-popup-dialog::before { display: none; }.model-popover .model-popup-viewer model-viewer { height: 58vh; } }
