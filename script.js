@@ -44,6 +44,15 @@ const modelViewer = document.getElementById('model-viewer');
 const modelViewerModal = document.getElementById('model-viewer-modal');
 const modelViewerTitle = document.getElementById('model-viewer-title');
 
+const resetModelView = () => {
+  modelViewer.cameraOrbit = 'auto auto auto';
+  modelViewer.cameraTarget = 'auto auto auto';
+  modelViewer.fieldOfView = 'auto';
+  modelViewer.jumpCameraToGoal();
+};
+
+modelViewer.addEventListener('load', resetModelView);
+
 document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
   const image = galleryImage.querySelector('img');
   if (!image || !image.alt) return;
@@ -89,6 +98,7 @@ galleryModals.forEach((modal) => {
 
 document.querySelectorAll('.model-trigger').forEach((trigger) => trigger.addEventListener('click', () => {
   const triggerBounds = trigger.getBoundingClientRect();
+  resetModelView();
   modelViewer.src = trigger.dataset.model;
   modelViewer.alt = `Interactive 3D model: ${trigger.dataset.modelName}`;
   modelViewerTitle.textContent = trigger.dataset.modelName;
