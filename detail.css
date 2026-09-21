@@ -31,6 +31,73 @@
   display:block;
   background:#d8d2c7
 }
+.poster-disclosure {
+  position:relative;
+  isolation:isolate
+}
+.poster-disclosure::after {
+  content:'';
+  position:absolute;
+  right:0;
+  bottom:0;
+  left:0;
+  height:45%;
+  z-index:1;
+  background:linear-gradient(to bottom,transparent,#000);
+  pointer-events:none
+}
+.poster-toggle {
+  position:absolute;
+  inset:0;
+  z-index:3;
+  width:auto;
+  height:auto;
+  margin:0;
+  opacity:0;
+  cursor:pointer
+}
+.poster-disclosure label {
+  position:absolute;
+  bottom:14px;
+  left:50%;
+  z-index:4;
+  pointer-events:none;
+  cursor:pointer;
+  width:24px;
+  height:24px;
+  padding:10px;
+  background:transparent;
+  background-clip:padding-box;
+  border-right:5px solid #ffffff;
+  border-bottom:5px solid #ffffff;
+  text-shadow:0 2px 8px rgba(0,0,0,.5);
+  transform:translateX(-50%) rotate(45deg);
+  transition:transform .2s ease
+}
+.poster-toggle:checked + label {
+  transform:translateX(-50%) rotate(-135deg)
+}
+.poster-preview {
+  width:100%;
+  aspect-ratio:4 / 1.25;
+  overflow:hidden;
+  margin:0 auto;
+  pointer-events:none
+}
+.poster-preview img {
+  height:100%;
+  object-fit:cover;
+  object-position:center 18%
+}
+.poster-disclosure:has(.poster-toggle:checked) .poster-preview {
+  aspect-ratio:auto;
+  overflow:visible
+}
+.poster-disclosure:has(.poster-toggle:checked) .poster-preview img {
+  height:auto;
+  object-fit:contain;
+  object-position:center
+}
 .poster-hero img {
   display:block;
   width:100%;
