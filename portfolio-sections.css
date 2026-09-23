@@ -400,10 +400,20 @@ body.modal-open {
   }
   .gallery-modal {
     padding: 0;
+    align-items: flex-start;
   }
   .gallery-dialog {
     min-height: 100vh;
     max-height: none;
+    padding-top: 28px;
+    padding-bottom: 34px;
+  }
+  .gallery-dialog h2 {
+    margin: 10px 0;
+    font-size: clamp(38px, 10vw, 58px);
+  }
+  .gallery-grid {
+    margin-top: 24px;
   }
   .gallery-art {
     min-height: 0;
@@ -447,12 +457,11 @@ body.modal-open {
 }
 @media (max-width: 480px) {
   .gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
-  .gallery-grid .gallery-image,
-  #characters-modal .gallery-image {
-    grid-column: auto;
-    grid-row: auto;
+  .gallery-dialog {
+    padding-right: 20px;
+    padding-left: 20px;
   }
 }
