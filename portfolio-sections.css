@@ -184,8 +184,11 @@
   line-height: 1.65;
 }
 .gallery-grid {
-  column-count: 4;
-  column-gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: var(--gallery-cell-size, 105px);
+  grid-auto-flow: dense;
+  gap: 15px;
   margin-top: 38px;
 }
 .gallery-art {
@@ -196,15 +199,21 @@
 .gallery-image {
   display: block;
   width: 100%;
-  margin: 0 0 15px;
-  break-inside: avoid;
+  min-width: 0;
+  margin: 0;
   background: #d8d2c7;
 }
 .gallery-image img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
+.gallery-square { grid-column: span 1; grid-row: span 1; }
+.gallery-tall { grid-column: span 1; grid-row: span 2; }
+.gallery-wide { grid-column: span 2; grid-row: span 1; }
+.gallery-feature { grid-column: span 2; grid-row: span 2; }
+
 .model-trigger {
   display: block;
   width: 100%;
@@ -372,8 +381,8 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
   .gallery-grid {
-    column-count: 2;
-    column-gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
   .collection-card {
     min-height: 330px;
@@ -429,12 +438,21 @@ body.modal-open {
 }
 @media (max-width: 1040px) and (min-width: 761px) {
   .gallery-grid {
-    column-count: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  #characters-modal .gallery-image {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
 @media (max-width: 480px) {
   .gallery-grid {
-    column-count: 1;
-    column-gap: 0;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .gallery-grid .gallery-image,
+  #characters-modal .gallery-image {
+    grid-column: auto;
+    grid-row: auto;
   }
 }

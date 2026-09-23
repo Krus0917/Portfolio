@@ -77,6 +77,22 @@ document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
   galleryImage.addEventListener('blur', () => galleryImage.classList.remove('is-active'));
 });
 
+const updateGalleryCellSizes = () => {
+  document.querySelectorAll('.gallery-grid').forEach((gallery) => {
+    const galleryWidth = gallery.clientWidth;
+    if (!galleryWidth) return;
+
+    const styles = getComputedStyle(gallery);
+    const columnCount = styles.gridTemplateColumns.split(' ').length;
+    const gap = parseFloat(styles.columnGap) || 0;
+    const cellSize = (galleryWidth - gap * (columnCount - 1)) / columnCount;
+    gallery.style.setProperty('--gallery-cell-size', `${cellSize}px`);
+  });
+};
+
+window.addEventListener('resize', updateGalleryCellSizes);
+updateGalleryCellSizes();
+
 const closeGallery = (modal) => {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
@@ -88,6 +104,7 @@ modalTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
+  requestAnimationFrame(updateGalleryCellSizes);
   modal.querySelector('.modal-close-button').focus();
 }));
 
