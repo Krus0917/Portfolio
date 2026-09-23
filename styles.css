@@ -41,13 +41,15 @@
   box-sizing:border-box
 }
 html {
-  scroll-behavior:smooth
+  scroll-behavior:smooth;
+  overflow-x:hidden
 }
 body {
   margin:0;
   background:#f5f5f5;
   color:var(--ink);
-  font-family:Manrope,Arial,sans-serif
+  font-family:Manrope,Arial,sans-serif;
+  overflow-x:hidden
 }
 .site-header,footer {
   display:flex;
@@ -84,11 +86,13 @@ body {
   font:600 13px Manrope
 }
 .hero {
-  min-height:680px;
+  min-height:560px;
+  position:relative;
+  z-index:2;
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1.15fr .85fr;
   gap:5%;
-  padding:7.5% 9% 5.5%;
+  padding:5.5% 9% 3%;
   align-items:center
 }
 .eyebrow {
@@ -111,7 +115,7 @@ body {
   letter-spacing:-.065em
 }
 .hero h1 {
-  font-size:clamp(46px,6.1vw,88px)
+  font-size:clamp(46px,7vw,88px)
 }
 em {
   font-family:Georgia,serif;
