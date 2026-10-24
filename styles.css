@@ -81,9 +81,6 @@ body {
   font-weight:800;
   color:var(--green)
 }
-.section,.contact {
-  scroll-margin-top:var(--header-height, 0px)
-}
 .menu-button {
   display:none;
   background:transparent;
