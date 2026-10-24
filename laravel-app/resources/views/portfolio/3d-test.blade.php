@@ -46,7 +46,7 @@
           <h1>Rotate it.<br />Inspect it.</h1>
           <p class="model-test-copy">This page loads one local GLB file so you can check model scale, materials, lighting, rotation, and zooming before adding a finished viewer to the portfolio.</p>
         </div>
-        <a class="model-test-link" href="index.html#work">← Back to work</a>
+        <a class="model-test-link" href="{{ route('portfolio.home') }}#work">← Back to work</a>
       </div>
       <section id="work" class="model-test-work section">
         <div class="section-heading">

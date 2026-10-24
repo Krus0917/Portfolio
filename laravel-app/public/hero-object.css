@@ -9,10 +9,10 @@
   position: absolute;
   z-index: 1;
   width: auto;
-  height: 175%;
+  height: 205%;
   max-width: none;
   right: -18%;
-  top: -6%;
+  top: -20%;
   transform: scaleX(-1) rotate(-20deg);
   transform-origin: center bottom;
 }

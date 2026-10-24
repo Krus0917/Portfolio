@@ -77,7 +77,7 @@
           <h2>Games built<br />with a team.</h2>
           <p class="muted">These game titles show how my art and assets contributed to a complete playable project.</p>
         </div>
-        <a class="game-card" href="edenisland.html">
+        <a class="game-card" href="{{ route('portfolio.eden-island') }}">
           <div class="game-card-art game-card-image">
             <img src="img/Eden%20Island%20Frontier%20-%20Logo.png" alt="Eden Island Frontier logo" />
             <span>3D Artist</span>
@@ -90,7 +90,7 @@
             </span>
           </div>
         </a>
-        <a class="game-card" href="ecoventures.html">
+        <a class="game-card" href="{{ route('portfolio.eco-ventures') }}">
           <div class="game-card-art game-card-image">
             <img src="img/Eco%20ventures%20Title%20V2.png" alt="EcoVentures logo" />
             <span>Lead 3D Artist</span>

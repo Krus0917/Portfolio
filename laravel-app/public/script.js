@@ -22,6 +22,9 @@ const sectionsById = new Map(
 
 const setActiveSection = (sectionId) => {
   sectionLinks.forEach((link) => link.classList.toggle('active', link.hash === `#${sectionId}`));
+  if (window.location.hash !== `#${sectionId}`) {
+    window.history.replaceState(null, '', `#${sectionId}`);
+  }
 };
 
 const updateActiveSection = () => {
@@ -31,11 +34,15 @@ const updateActiveSection = () => {
     return bounds.top <= markerPosition && bounds.bottom >= markerPosition;
   });
 
-  if (visibleSection) setActiveSection(visibleSection.id);
+  if (visibleSection) {
+    setActiveSection(visibleSection.id);
+  }
 };
 
 window.addEventListener('scroll', updateActiveSection, { passive: true });
 window.addEventListener('resize', updateActiveSection);
+const initialSection = window.location.hash.slice(1);
+if (sectionsById.has(initialSection)) setActiveSection(initialSection);
 updateActiveSection();
 
 const modalTriggers = document.querySelectorAll('[data-modal-target]');

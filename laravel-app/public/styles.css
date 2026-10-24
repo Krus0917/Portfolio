@@ -93,7 +93,8 @@ body {
   grid-template-columns:1.15fr .85fr;
   gap:5%;
   padding:5.5% 9% 3%;
-  align-items:center
+  align-items:center;
+  margin-left: 5%;
 }
 .eyebrow {
   font:500 11px/1.2 'DM Mono',monospace;

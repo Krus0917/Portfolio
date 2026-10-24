@@ -15,7 +15,7 @@
     <div class="modal-backdrop" aria-hidden="true">
     </div>
     <main class="detail-page project-modal" role="dialog" aria-modal="true" aria-labelledby="project-title">
-      <a class="modal-close" href="index.html#work" aria-label="Close project details">
+      <a class="modal-close" href="{{ route('portfolio.home') }}#games" aria-label="Close project details">
         <span>×</span> Close</a>
       <div class="detail-title">
         <p class="eyebrow">Thesis capstone · 3D strategy and resource-management game</p>
