@@ -1,6 +1,17 @@
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   background: var(--paper);
+  transition: box-shadow .2s ease;
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 8px 24px rgba(17, 17, 17, .08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
 }

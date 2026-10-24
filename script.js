@@ -1,5 +1,10 @@
 const menuButton = document.querySelector('.menu-button');
 const nav = document.querySelector('.nav');
+const header = document.querySelector('.site-header');
+
+const updateHeaderHeight = () => {
+  document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+};
 
 menuButton.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
@@ -21,21 +26,33 @@ const sectionsById = new Map(
 );
 
 const setActiveSection = (sectionId) => {
-  sectionLinks.forEach((link) => link.classList.toggle('active', link.hash === `#${sectionId}`));
+  sectionLinks.forEach((link) => {
+    const isActive = link.hash === `#${sectionId}`;
+    link.classList.toggle('active', isActive);
+    if (isActive) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
 };
 
 const updateActiveSection = () => {
-  const markerPosition = window.innerHeight * 0.35;
-  const visibleSection = [...sectionsById.values()].find((section) => {
-    const bounds = section.getBoundingClientRect();
-    return bounds.top <= markerPosition && bounds.bottom >= markerPosition;
-  });
+  const markerPosition = header.offsetHeight + window.innerHeight * 0.25;
+  const visibleSection = [...sectionsById.values()]
+    .filter((section) => section.getBoundingClientRect().top <= markerPosition)
+    .pop();
 
-  if (visibleSection) setActiveSection(visibleSection.id);
+  setActiveSection(visibleSection ? visibleSection.id : null);
 };
 
 window.addEventListener('scroll', updateActiveSection, { passive: true });
-window.addEventListener('resize', updateActiveSection);
+window.addEventListener('scroll', () => {
+  header.classList.toggle('is-scrolled', window.scrollY > 0);
+}, { passive: true });
+window.addEventListener('resize', () => {
+  updateHeaderHeight();
+  updateActiveSection();
+});
+updateHeaderHeight();
+header.classList.toggle('is-scrolled', window.scrollY > 0);
 updateActiveSection();
 
 const modalTriggers = document.querySelectorAll('[data-modal-target]');
