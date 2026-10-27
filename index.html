@@ -214,14 +214,13 @@
         <button class="modal-close-button" type="button" aria-label="Close gallery">×</button>
         <p class="eyebrow">Creative work / 03</p>
         <h2 id="environments-title">3D Environment Assets</h2>
-        <p class="gallery-intro">Scenes, buildings, and environmental assets built from real places around FEU Manila.</p>
+        <p class="gallery-intro">Scenes, buildings, and environmental assets</p>
         <section class="environment-process" aria-labelledby="environment-process-title">
-          <button class="environment-process-close" type="button" aria-label="Close environment process">Close process ×</button>
+          <button class="environment-process-close" type="button" aria-label="Back to environment gallery">Back to gallery <span aria-hidden="true">×</span></button>
           <div class="environment-process-list">
             <article class="environment-process-card" data-environment-study-panel="freedom-park">
               <div class="environment-process-copy">
-                <p class="environment-process-number">01 / FEU Manila</p>
-                <h4>Freedom Park</h4>
+                <h3 id="environment-process-title">Freedom Park</h3>
                 <p>The campus lawn, trees, surrounding buildings, and shaded walkways became the main visual anchors for this environment.</p>
               </div>
               <div class="environment-process-images">
@@ -232,23 +231,22 @@
                 <div class="environment-render-grid">
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FEU%20Manila%20Freedom%20Park%201.png" alt="3D render of FEU Manila Freedom Park, view 1" />
-                    <figcaption>3D study / 01</figcaption>
+                    <figcaption>3D render / 01</figcaption>
                   </figure>
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FEU%20Manila%20Freedom%20Park%202.png" alt="3D render of FEU Manila Freedom Park, view 2" />
-                    <figcaption>3D study / 02</figcaption>
+                    <figcaption>3D render / 02</figcaption>
                   </figure>
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FEU%20Manila%20Freedom%20Park%203.png" alt="3D render of FEU Manila Freedom Park, view 3" />
-                    <figcaption>3D study / 03</figcaption>
+                    <figcaption>3D render / 03</figcaption>
                   </figure>
                 </div>
               </div>
             </article>
             <article class="environment-process-card" data-environment-study-panel="student-plaza">
               <div class="environment-process-copy">
-                <p class="environment-process-number">02 / FEU Tech</p>
-                <h4>Student Plaza</h4>
+                <h3>Student Plaza</h3>
                 <p>The open student area was recreated with attention to its central seating, circulation paths, and multi-level surroundings.</p>
               </div>
               <div class="environment-process-images">
@@ -259,23 +257,22 @@
                 <div class="environment-render-grid">
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FEU%20Tech%20Student%20Lounge%201.png" alt="3D render of the FEU Tech student plaza, view 1" />
-                    <figcaption>3D study / 01</figcaption>
+                    <figcaption>3D render / 01</figcaption>
                   </figure>
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FEU%20Tech%20Student%20Lounge%202.png" alt="3D render of the FEU Tech student plaza, view 2" />
-                    <figcaption>3D study / 02</figcaption>
+                    <figcaption>3D render / 02</figcaption>
                   </figure>
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FEU%20Tech%20Student%20Lounge%203.png" alt="3D render of the FEU Tech student plaza, view 3" />
-                    <figcaption>3D study / 03</figcaption>
+                    <figcaption>3D render / 03</figcaption>
                   </figure>
                 </div>
               </div>
             </article>
             <article class="environment-process-card" data-environment-study-panel="ftic-lounge">
               <div class="environment-process-copy">
-                <p class="environment-process-number">03 / FEU Tech</p>
-                <h4>FTIC Lounge</h4>
+                <h3>FTIC Lounge</h3>
                 <p>The lounge study focuses on the wide open floor plan, ceiling services, work tables, and the mix of warm and cool materials.</p>
               </div>
               <div class="environment-process-images">
@@ -286,15 +283,15 @@
                 <div class="environment-render-grid">
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FTIC%20Lounge%201.png" alt="3D render of the FTIC Lounge, view 1" />
-                    <figcaption>3D study / 01</figcaption>
+                    <figcaption>3D render / 01</figcaption>
                   </figure>
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FTIC%20Lounge%202.png" alt="3D render of the FTIC Lounge, view 2" />
-                    <figcaption>3D study / 02</figcaption>
+                    <figcaption>3D render / 02</figcaption>
                   </figure>
                   <figure>
                     <img src="img/3D%20Environment%20Assets/FTIC%20Lounge%203.png" alt="3D render of the FTIC Lounge, view 3" />
-                    <figcaption>3D study / 03</figcaption>
+                    <figcaption>3D render / 03</figcaption>
                   </figure>
                 </div>
               </div>
@@ -343,6 +340,17 @@
           <model-viewer id="model-viewer" camera-controls min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto" touch-action="pan-y" shadow-intensity="1" exposure="1"></model-viewer>
         </div>
         <p class="model-popup-status">Drag to rotate. Scroll or pinch to zoom.</p>
+      </div>
+    </div>
+    <div class="environment-image-modal" id="environment-image-modal" role="dialog" aria-modal="true" aria-labelledby="environment-image-title" aria-hidden="true">
+      <div class="environment-image-dialog">
+        <button class="modal-close-button" type="button" aria-label="Close enlarged environment render">×</button>
+        <p class="eyebrow">Environment render</p>
+        <h2 id="environment-image-title">3D study</h2>
+        <div class="environment-image-viewer">
+          <img id="environment-image" src="" alt="" />
+        </div>
+        <p class="model-popup-status">Use the close button or press Escape to return to the study.</p>
       </div>
     </div>
     <footer>

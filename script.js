@@ -60,6 +60,9 @@ const galleryModals = document.querySelectorAll('.gallery-modal');
 const modelViewer = document.getElementById('model-viewer');
 const modelViewerModal = document.getElementById('model-viewer-modal');
 const modelViewerTitle = document.getElementById('model-viewer-title');
+const environmentImageModal = document.getElementById('environment-image-modal');
+const environmentImage = document.getElementById('environment-image');
+const environmentImageTitle = document.getElementById('environment-image-title');
 
 const resetModelView = () => {
   modelViewer.cameraOrbit = 'auto auto auto';
@@ -97,17 +100,15 @@ document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
 document.querySelectorAll('.environment-study-trigger').forEach((trigger) => {
   const showStudy = () => {
     const environmentModal = trigger.closest('#environments-modal');
-    const process = environmentModal.querySelector('.environment-process');
-    const galleryGrid = trigger.closest('.gallery-grid');
+    const process = document.querySelector('.environment-process');
     const studyId = trigger.dataset.environmentStudy;
     const studyPanel = process.querySelector(`[data-environment-study-panel="${studyId}"]`);
 
-    galleryGrid.insertBefore(process, trigger.nextElementSibling);
+    environmentModal.classList.add('study-open');
     process.classList.add('is-visible');
     process.querySelectorAll('.environment-process-card').forEach((panel) => {
       panel.classList.toggle('is-selected', panel === studyPanel);
     });
-    process.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   trigger.addEventListener('click', showStudy);
@@ -119,10 +120,59 @@ document.querySelectorAll('.environment-study-trigger').forEach((trigger) => {
   });
 });
 
-document.querySelector('.environment-process-close').addEventListener('click', () => {
-  const process = document.querySelector('.environment-process');
+const closeEnvironmentProcess = (process) => {
+  const environmentModal = document.querySelector('#environments-modal');
+  environmentModal.classList.remove('study-open');
   process.classList.remove('is-visible');
   process.querySelectorAll('.environment-process-card').forEach((panel) => panel.classList.remove('is-selected'));
+};
+
+document.querySelectorAll('.environment-process').forEach((process) => {
+  process.querySelector('.environment-process-close').addEventListener('click', () => closeEnvironmentProcess(process));
+});
+
+const closeEnvironmentImage = () => {
+  environmentImageModal.classList.remove('open');
+  environmentImageModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('environment-image-open');
+};
+
+const openEnvironmentImage = (figure) => {
+  const image = figure.querySelector('img');
+  const caption = figure.querySelector('figcaption');
+  if (!image) return;
+
+  environmentImage.src = image.src;
+  environmentImage.alt = image.alt;
+  environmentImageTitle.textContent = caption ? caption.textContent : '3D study';
+  environmentImageModal.classList.add('open');
+  environmentImageModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('environment-image-open');
+  environmentImageModal.querySelector('.modal-close-button').focus();
+};
+
+document.querySelectorAll('.environment-render-grid figure').forEach((figure) => {
+  const image = figure.querySelector('img');
+  const renderLabel = image ? image.alt : 'environment render';
+  figure.setAttribute('role', 'button');
+  figure.setAttribute('tabindex', '0');
+  figure.setAttribute('aria-label', `Enlarge ${renderLabel}`);
+  figure.addEventListener('click', (event) => {
+    event.stopPropagation();
+    openEnvironmentImage(figure);
+  });
+  figure.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      event.stopPropagation();
+      openEnvironmentImage(figure);
+    }
+  });
+});
+
+environmentImageModal.querySelector('.modal-close-button').addEventListener('click', closeEnvironmentImage);
+environmentImageModal.addEventListener('click', (event) => {
+  if (event.target === environmentImageModal) closeEnvironmentImage();
 });
 
 const updateGalleryCellSizes = () => {
@@ -144,14 +194,16 @@ updateGalleryCellSizes();
 const closeGallery = (modal) => {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
+  if (modal.id === 'environments-modal') {
+    closeEnvironmentProcess(document.querySelector('.environment-process'));
+  }
   if (!document.querySelector('.gallery-modal.open')) document.body.classList.remove('modal-open');
 };
 
 modalTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
   const modal = document.getElementById(trigger.dataset.modalTarget);
   if (modal.id === 'environments-modal') {
-    modal.querySelector('.environment-process').classList.remove('is-visible');
-    modal.querySelectorAll('.environment-process-card').forEach((panel) => panel.classList.remove('is-selected'));
+    closeEnvironmentProcess(document.querySelector('.environment-process'));
   }
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
@@ -194,5 +246,16 @@ document.querySelectorAll('.model-trigger').forEach((trigger) => trigger.addEven
 }));
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') galleryModals.forEach((modal) => closeGallery(modal));
+  if (event.key === 'Escape') {
+    if (environmentImageModal.classList.contains('open')) {
+      closeEnvironmentImage();
+      return;
+    }
+    const environmentProcess = document.querySelector('.environment-process.is-visible');
+    if (environmentProcess) {
+      closeEnvironmentProcess(environmentProcess);
+      return;
+    }
+    galleryModals.forEach((modal) => closeGallery(modal));
+  }
 });
