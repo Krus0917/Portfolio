@@ -131,6 +131,27 @@ document.querySelectorAll('.environment-process').forEach((process) => {
   process.querySelector('.environment-process-close').addEventListener('click', () => closeEnvironmentProcess(process));
 });
 
+document.querySelectorAll('.environment-reference-switch').forEach((reference) => {
+  const switchReference = () => {
+    const images = [...reference.querySelectorAll('img')];
+    const activeIndex = images.findIndex((image) => image.classList.contains('is-active'));
+    const nextIndex = activeIndex === -1 ? 0 : (activeIndex + 1) % images.length;
+
+    images.forEach((image, index) => {
+      image.classList.toggle('is-active', index === nextIndex);
+    });
+    reference.setAttribute('aria-label', `Show the next Freedom Park reference photograph, view ${nextIndex + 1}`);
+  };
+
+  reference.addEventListener('click', switchReference);
+  reference.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      switchReference();
+    }
+  });
+});
+
 const closeEnvironmentImage = () => {
   environmentImageModal.classList.remove('open');
   environmentImageModal.setAttribute('aria-hidden', 'true');
