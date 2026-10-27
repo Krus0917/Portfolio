@@ -98,14 +98,16 @@ document.querySelectorAll('.environment-study-trigger').forEach((trigger) => {
   const showStudy = () => {
     const environmentModal = trigger.closest('#environments-modal');
     const process = environmentModal.querySelector('.environment-process');
+    const galleryGrid = trigger.closest('.gallery-grid');
     const studyId = trigger.dataset.environmentStudy;
     const studyPanel = process.querySelector(`[data-environment-study-panel="${studyId}"]`);
 
+    galleryGrid.insertBefore(process, trigger.nextElementSibling);
     process.classList.add('is-visible');
     process.querySelectorAll('.environment-process-card').forEach((panel) => {
       panel.classList.toggle('is-selected', panel === studyPanel);
     });
-    studyPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    process.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   trigger.addEventListener('click', showStudy);
@@ -115,6 +117,12 @@ document.querySelectorAll('.environment-study-trigger').forEach((trigger) => {
       showStudy();
     }
   });
+});
+
+document.querySelector('.environment-process-close').addEventListener('click', () => {
+  const process = document.querySelector('.environment-process');
+  process.classList.remove('is-visible');
+  process.querySelectorAll('.environment-process-card').forEach((panel) => panel.classList.remove('is-selected'));
 });
 
 const updateGalleryCellSizes = () => {
