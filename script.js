@@ -94,6 +94,29 @@ document.querySelectorAll('.gallery-image').forEach((galleryImage, index) => {
   galleryImage.addEventListener('blur', () => galleryImage.classList.remove('is-active'));
 });
 
+document.querySelectorAll('.environment-study-trigger').forEach((trigger) => {
+  const showStudy = () => {
+    const environmentModal = trigger.closest('#environments-modal');
+    const process = environmentModal.querySelector('.environment-process');
+    const studyId = trigger.dataset.environmentStudy;
+    const studyPanel = process.querySelector(`[data-environment-study-panel="${studyId}"]`);
+
+    process.classList.add('is-visible');
+    process.querySelectorAll('.environment-process-card').forEach((panel) => {
+      panel.classList.toggle('is-selected', panel === studyPanel);
+    });
+    studyPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  trigger.addEventListener('click', showStudy);
+  trigger.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      showStudy();
+    }
+  });
+});
+
 const updateGalleryCellSizes = () => {
   document.querySelectorAll('.gallery-grid').forEach((gallery) => {
     const galleryWidth = gallery.clientWidth;
@@ -118,6 +141,10 @@ const closeGallery = (modal) => {
 
 modalTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
   const modal = document.getElementById(trigger.dataset.modalTarget);
+  if (modal.id === 'environments-modal') {
+    modal.querySelector('.environment-process').classList.remove('is-visible');
+    modal.querySelectorAll('.environment-process-card').forEach((panel) => panel.classList.remove('is-selected'));
+  }
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
