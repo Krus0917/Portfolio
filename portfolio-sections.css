@@ -183,6 +183,106 @@
   max-width: 560px;
   line-height: 1.65;
 }
+.environment-process {
+  margin-top: 58px;
+  padding-top: 38px;
+  border-top: 1px solid #c9c4ba;
+}
+.environment-process-heading {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  column-gap: 30px;
+  align-items: start;
+}
+.environment-process-heading .eyebrow {
+  grid-column: 1;
+  margin: 0;
+}
+.environment-process-heading h3 {
+  grid-column: 2;
+  margin: 0 0 12px;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: .95;
+  letter-spacing: -.06em;
+}
+.environment-process-heading > p:last-child {
+  grid-column: 2;
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.6;
+}
+.environment-process-list {
+  display: grid;
+  gap: 48px;
+  margin-top: 48px;
+}
+.environment-process-card {
+  padding-top: 28px;
+  border-top: 1px solid #c9c4ba;
+}
+.environment-process-copy {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  column-gap: 30px;
+  align-items: baseline;
+}
+.environment-process-number {
+  margin: 0;
+  font: 11px 'DM Mono', monospace;
+  text-transform: uppercase;
+}
+.environment-process-copy h4 {
+  margin: 0;
+  font-size: clamp(26px, 3.5vw, 42px);
+  letter-spacing: -.06em;
+}
+.environment-process-copy > p:last-child {
+  grid-column: 2;
+  max-width: 520px;
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+.environment-process-images {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 15px;
+  margin-top: 24px;
+}
+.environment-process-images figure {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #d8d2c7;
+}
+.environment-process-images img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.environment-reference {
+  min-height: 300px;
+}
+.environment-render-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.environment-render-grid figure {
+  min-height: 180px;
+}
+.environment-process-images figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 9px 10px;
+  background: rgba(22, 22, 19, .82);
+  color: var(--paper);
+  font: 10px 'DM Mono', monospace;
+  text-transform: uppercase;
+}
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -383,6 +483,26 @@ body.modal-open {
   .gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+  }
+  .environment-process-heading,
+  .environment-process-copy {
+    display: block;
+  }
+  .environment-process-heading h3 {
+    margin-top: 14px;
+  }
+  .environment-process-heading > p:last-child,
+  .environment-process-copy > p:last-child {
+    margin-top: 12px;
+  }
+  .environment-process-images {
+    grid-template-columns: 1fr;
+  }
+  .environment-reference {
+    min-height: 220px;
+  }
+  .environment-render-grid figure {
+    min-height: 120px;
   }
   .collection-card {
     min-height: 330px;
