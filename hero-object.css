@@ -5,16 +5,15 @@
   display: flex;
   justify-content: flex-end;
 }
-.hero-portrait img {
+.hero-portrait canvas {
   position: absolute;
   z-index: 1;
-  width: auto;
-  height: 175%;
+  width: 230%;
+  height: 205%;
   max-width: none;
-  right: -18%;
-  top: -6%;
-  transform: scaleX(-1) rotate(-20deg);
-  transform-origin: center bottom;
+  right: -74%;
+  top: -15%;
+  display: block;
 }
 .hero-portrait p {
   padding: 7px 9px;
@@ -25,9 +24,11 @@
   .hero-portrait {
     overflow: hidden;
   }
-  .hero-portrait img {
+  .hero-portrait canvas {
+    width: 120%;
     height: 106%;
     right: -10%;
     bottom: -3%;
+    top: auto;
   }
 }

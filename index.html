@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+        }
+      }
+    </script>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="sticky-header.css" />
     <link rel="stylesheet" href="placeholders.css" />
@@ -38,7 +46,7 @@
           </a>
         </div>
         <div class="hero-portrait">
-          <img src="img/Main%20Hero%20Object.png" alt="Stylized 3D self-portrait of Luis Montinola holding a 3D modeling tool" />
+          <canvas id="hero-model-canvas" role="img" aria-label="Interactive 3D self-portrait of Luis Montinola"></canvas>
         </div>
       </section>
       <section id="work" class="work section">
@@ -365,6 +373,7 @@
     </footer>
     <script src="script.js">
     </script>
+    <script type="module" src="hero-model.js"></script>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
     </script>
   </body>
